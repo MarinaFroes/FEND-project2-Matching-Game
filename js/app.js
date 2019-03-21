@@ -1,8 +1,25 @@
 //TODO: Start by building a grid of randomly placed cards
 
 //  * Create a list that holds all of your cards
-//Array of fontawesome icon's classes
-let arrayOfClasses = ['far fa-angry', 'far fa-grin-hearts', 'far fa-frown-open', 'far fa-grimace', 'far fa-grin', 'far fa-grin-beam-sweat', 'far fa-meh-rolling-eyes', 'far fa-grin-tongue', 'far fa-angry', 'far fa-grin-hearts', 'far fa-frown-open', 'far fa-grimace', 'far fa-grin', 'far fa-grin-beam-sweat', 'far fa-meh-rolling-eyes', 'far fa-grin-tongue'];
+//Array of fontawesome icons
+let arrayOfIcons = [
+  '<i class="far fa-grin-hearts"></i>',
+  '<i class="far fa-frown-open"></i>',
+  '<i class="far fa-grimace"></i>',
+  '<i class="far fa-grin"></i>',
+  '<i class="far fa-grin-beam-sweat"></i>',
+  '<i class="far fa-meh-rolling-eyes"></i>',
+  '<i class="far fa-grin-squint"></i>',
+  '<i class="far fa-grin-tongue"></i>',
+  '<i class="far fa-grin-hearts"></i>',
+  '<i class="far fa-frown-open"></i>',
+  '<i class="far fa-grimace"></i>',
+  '<i class="far fa-grin"></i>',
+  '<i class="far fa-grin-beam-sweat"></i>',
+  '<i class="far fa-meh-rolling-eyes"></i>',
+  '<i class="far fa-grin-squint"></i>',
+  '<i class="far fa-grin-tongue"></i>'
+];
 
 //  * Display the cards on the page
 //  - shuffle the list of cards using the provided "shuffle" method below
@@ -27,7 +44,7 @@ function shuffle(array) {
 }
 
 //To shuffle the array of classes
-arrayOfClasses = shuffle(arrayOfClasses);
+arrayOfIcons = shuffle(arrayOfIcons);
 
 //Saving the deck ul element in a variable
 const myDeckOfCards = document.getElementById("deck");
@@ -35,16 +52,14 @@ const myDeckOfCards = document.getElementById("deck");
 //Creating i elements and li elements, appeding them to the deck ul element
 function addCards(element, array) {
   for (let i = 0; i < array.length; i++) {
-    let newIElement = document.createElement('i'); newIElement.setAttribute('class', array[i]);
-    // newCard.innerText = array[i];
     let newCard = document.createElement('li');
+    newCard.innerHTML = array[i];
     newCard.setAttribute('class', 'card');
-    newCard.appendChild(newIElement);
     element.appendChild(newCard);
   }
 }
 
-addCards(myDeckOfCards, arrayOfClasses);
+addCards(myDeckOfCards, arrayOfIcons);
 
 //TODO: Add the functionality to handle clicks (event delegation)
 //  * set up the event listener for a card. If a card is clicked:
