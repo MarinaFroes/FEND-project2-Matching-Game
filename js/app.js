@@ -65,10 +65,14 @@ addCards(myDeckOfCards, arrayOfIcons);
 //  * set up the event listener for a card. If a card is clicked:
 //  *  - display the card's symbol (put this functionality in another function that you call from this one)
 //  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- 
+let opennedCards = [];
+
 function openCard() {
+  countMoves();
   if (event.target.nodeName === 'LI') {
     event.target.classList.add('open');
+    opennedCards.push(event.target.innerHTML);
+    console.log(opennedCards);
   }
 }
 
@@ -85,6 +89,12 @@ function openCard() {
 //Implement additional functionality
 //TODO: Move counter
 // + increment the move counter and display it on the page(put this functionality in another function that you call from this one)
+let counter = 0;
+
+function countMoves() {
+  counter++;
+  document.querySelector('.moves').innerText = counter;
+}
 
 
 //TODO: Timer
