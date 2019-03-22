@@ -50,28 +50,28 @@ arrayOfIcons = shuffle(arrayOfIcons);
 const myDeckOfCards = document.getElementById("deck");
 
 //Creating i elements and li elements, appeding them to the deck ul element
-function addCards(element, array) {
+function addCardsToDeck(parentElement, array) {
   for (let i = 0; i < array.length; i++) {
     let newCard = document.createElement('li');
     newCard.innerHTML = array[i];
     newCard.setAttribute('class', 'card');
-    element.appendChild(newCard);
+    parentElement.appendChild(newCard);
   }
 }
 
-addCards(myDeckOfCards, arrayOfIcons);
+addCardsToDeck(myDeckOfCards, arrayOfIcons);
 
 //TODO: Add the functionality to handle clicks (event delegation)
 //  * set up the event listener for a card. If a card is clicked:
 //  *  - display the card's symbol (put this functionality in another function that you call from this one)
-let opennedCards = [];
+let opennedCardsArray = [];
 
 function openCard() {
-  if (opennedCards.length < 2) {
+  if (opennedCardsArray.length < 2) {
     if (event.target.nodeName === 'LI' && !event.target.classList.contains('open')) {
       event.target.classList.add('open');
       countMoves();
-      listOfOpennedCards(event.target.innerHTML);
+      addOpenCardsToList(event.target.innerHTML);
     }
   }
 }
@@ -80,12 +80,12 @@ function openCard() {
 //  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 // * - if the list already has another card, check to see if the two cards match
 
-function listOfOpennedCards(card) {
-  opennedCards.push(card);
-  console.log(opennedCards);
-  if (opennedCards.length === 2) {
+function addOpenCardsToList(card) {
+  opennedCardsArray.push(card);
+  console.log(opennedCardsArray);
+  if (opennedCardsArray.length === 2) {
     console.log('I invoked isItAMatch function');
-    return isItAMatch(opennedCards);
+    return isItAMatch(opennedCardsArray);
   }
 }
 
