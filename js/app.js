@@ -97,15 +97,12 @@ function isItAMatch() {
     arrayOfClickedCards.forEach(item => openCardsArray.push(item));
     console.log('it is a match');
     console.log(`openCardsArray: ${openCardsArray}`);
-    
-    //TODO: check if openCardsArray.length === 16
-    //TODO: if it is, call the finishGame() function
   } else {
     console.log('Not a match');
     setTimeout(notAMatch, 1000, arrayOfClickedCards);
   }
   if (openCardsArray.length === 16) {
-    finishGame();
+    setTimeout(finishGame, 500);
   }
   return arrayOfClickedCards = [];
 }
@@ -132,7 +129,7 @@ function notAMatch(array) {
 //number of moves and option to restart the game ;
 
 function finishGame() {
-  alert('You finished');
+  alert(`You finished in ${document.getElementById('timer').innerText}. You did ${counter} moves.`);
   clearInterval(interval);
 }
 
