@@ -64,24 +64,42 @@ addCards(myDeckOfCards, arrayOfIcons);
 //TODO: Add the functionality to handle clicks (event delegation)
 //  * set up the event listener for a card. If a card is clicked:
 //  *  - display the card's symbol (put this functionality in another function that you call from this one)
-//  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 let opennedCards = [];
 
 function openCard() {
-  countMoves();
-  if (event.target.nodeName === 'LI') {
-    event.target.classList.add('open');
-    opennedCards.push(event.target.innerHTML);
-    console.log(opennedCards);
+  if (opennedCards.length < 2) {
+    if (event.target.nodeName === 'LI' && !event.target.classList.contains('open')) {
+      event.target.classList.add('open');
+      countMoves();
+      listOfOpennedCards(event.target.innerHTML);
+    }
   }
 }
 
 //TODO: Work on the matching logic
+//  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 // * - if the list already has another card, check to see if the two cards match
+
+function listOfOpennedCards(card) {
+  opennedCards.push(card);
+  console.log(opennedCards);
+  if (opennedCards.length === 2) {
+    console.log('I invoked isItAMatch function');
+    return isItAMatch(opennedCards);
+  }
+}
+
 //   * + if the cards do match, lock the cards in the open position(put this functionality in another function that you call from this one)
+
+function isItAMatch(array) {
+  console.log(array[0] === array[1] ? true : false);
+}
+
 //   * + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
 
 
+
+//event.target.classList.remove('open');
 //TODO: Create the winning condition
 // + if all cards have matched, display a message with the final score(put this functionality in another function that you call from this one)
 
@@ -113,7 +131,7 @@ function timer() {
     document.getElementById('timer').innerText = `End`;
   }
 }
-// const interval = setInterval(timer, 1000);
+//const interval = setInterval(timer, 1000);
 
 //TODO: Star rating
 
