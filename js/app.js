@@ -85,37 +85,56 @@ function addOpenCardsToList(card) {
   console.log(arrayOfClickedCards);
   if (arrayOfClickedCards.length === 2) {
     console.log('I invoked isItAMatch function');
-    return isItAMatch(arrayOfClickedCards);
+    return isItAMatch();
   }
 }
 
 //   * + if the cards do match, lock the cards in the open position(put this functionality in another function that you call from this one)
 let openCardsArray = []; 
 
-function isItAMatch(array) {
-  if (array[0] === array[1]) {
+function isItAMatch() {
+  if (arrayOfClickedCards[0] === arrayOfClickedCards[1]) {
     arrayOfClickedCards.forEach(item => openCardsArray.push(item));
     console.log('it is a match');
     console.log(`openCardsArray: ${openCardsArray}`);
+    
     //TODO: check if openCardsArray.length === 16
     //TODO: if it is, call the finishGame() function
   } else {
     console.log('Not a match');
-    //TODO: call notAMatch() function - removes the class of the element
+    setTimeout(notAMatch, 1000, arrayOfClickedCards);
+  }
+  if (openCardsArray.length === 16) {
+    finishGame();
   }
   return arrayOfClickedCards = [];
 }
 
 //   * + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
 
-//TODO: function notAMatch(){}
-
-
-//event.target.classList.remove('open');
+//TODO: 
+function notAMatch(array) {
+  let listItems = document.querySelectorAll('.card');
+  console.log(listItems);
+  for (let i = 0; i < listItems.length; i++) {
+    console.log(listItems[i]);
+    console.log(listItems[i].innerHTML);
+    if (listItems[i].classList.contains('open') && array.includes(listItems[i].innerHTML)) {
+      listItems[i].classList.remove('open');
+    }
+  }
+}
+  
 //TODO: Create the winning condition
 // + if all cards have matched, display a message with the final score(put this functionality in another function that you call from this one)
 
-//TODO: function finishGame();
+//TODO: add modal with time elapsed, star rating
+//number of moves and option to restart the game ;
+
+function finishGame() {
+  alert('You finished');
+  clearInterval(interval);
+}
 
 //Implement additional functionality
 //TODO: Move counter
@@ -131,19 +150,26 @@ function countMoves() {
 let sec = 0;
 let min = 0;
 
+function addLeftZero(num) {
+  if (num < 10) {
+    num = "0" + num;
+  }
+  return num;
+}
+
 function timer() {
-  document.getElementById('timer').innerText = `${min}:${sec}`;
+  document.getElementById('timer').innerText = `${addLeftZero(min)}:${addLeftZero(sec)}`;
   sec++;
   if (sec > 59) {
     sec = 0;
     min++;
   }
-  if (min > 10) {
+  if (min === 10) {
     clearInterval(interval);
     document.getElementById('timer').innerText = `End`;
   }
 }
-//const interval = setInterval(timer, 1000);
+const interval = setInterval(timer, 1000);
 
 //TODO: Star rating
 
