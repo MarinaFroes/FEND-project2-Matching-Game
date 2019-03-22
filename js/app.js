@@ -49,7 +49,7 @@ arrayOfIcons = shuffle(arrayOfIcons);
 //Saving the deck ul element in a variable
 const deckOfCards = document.getElementById("deck");
 
-//Creating li elements, appeding them to the deck ul element
+//Creating li elements and appending them to the deck ul element
 function addCardsToDeck(parentElement, array) {
   for (let i = 0; i < array.length; i++) {
     let newCard = document.createElement('li');
@@ -65,17 +65,23 @@ addCardsToDeck(deckOfCards, arrayOfIcons);
 //  * set up the event listener for a card. If a card is clicked:
 //  *  - display the card's symbol (put this functionality in another function that you call from this one)
 let arrayOfClickedCards = [];
+const cssOpenCardClass = 'open';
+let finishChecking = true;
 
 function openCard() {
-  if (arrayOfClickedCards.length < 2) {
-    if (event.target.nodeName === 'LI' && !event.target.classList.contains('open')) {
-      event.target.classList.add('open');
-      countMoves();
-      addOpenCardsToList(event.target.innerHTML);
-    }
+  if (!finishChecking) {
+    return;
+  }
+  if (arrayOfClickedCards.length >= 2) {
+    console.log('WARNING: arrayOfClickedCards.length > 2');
+    return;
+  }
+  if (event.target.nodeName === 'LI' && !event.target.classList.contains(cssOpenCardClass)) {
+    event.target.classList.add(cssOpenCardClass);
+    countMoves();
+    addOpenCardsToList(event.target.innerHTML);
   }
 }
-
 //TODO: Work on the matching logic
 //  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 // * - if the list already has another card, check to see if the two cards match
@@ -97,8 +103,10 @@ function isItAMatch() {
     arrayOfClickedCards.forEach(item => openCardsArray.push(item));
     console.log('it is a match');
     console.log(`openCardsArray: ${openCardsArray}`);
+    
   } else {
     console.log('Not a match');
+    finishChecking = false;
     setTimeout(notAMatch, 1000, arrayOfClickedCards);
   }
   if (openCardsArray.length === 16) {
@@ -110,16 +118,17 @@ function isItAMatch() {
 //   * + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
 
 //TODO: 
-function notAMatch(array) {
+function notAMatch(arrayOfClickedCards) {
   let listItems = document.querySelectorAll('.card');
-  console.log(listItems);
+  
   for (let i = 0; i < listItems.length; i++) {
-    console.log(listItems[i]);
-    console.log(listItems[i].innerHTML);
-    if (listItems[i].classList.contains('open') && array.includes(listItems[i].innerHTML)) {
-      listItems[i].classList.remove('open');
+    const icon = listItems[i].innerHTML;
+    
+    if (listItems[i].classList.contains(cssOpenCardClass) && arrayOfClickedCards.includes(icon)) {
+      listItems[i].classList.remove(cssOpenCardClass);
     }
   }
+  finishChecking = true;
 }
   
 //TODO: Create the winning condition
