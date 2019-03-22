@@ -43,13 +43,13 @@ function shuffle(array) {
   return array;
 }
 
-//To shuffle the array of classes
+//To shuffle the array of icons
 arrayOfIcons = shuffle(arrayOfIcons);
 
 //Saving the deck ul element in a variable
-const myDeckOfCards = document.getElementById("deck");
+const deckOfCards = document.getElementById("deck");
 
-//Creating i elements and li elements, appeding them to the deck ul element
+//Creating li elements, appeding them to the deck ul element
 function addCardsToDeck(parentElement, array) {
   for (let i = 0; i < array.length; i++) {
     let newCard = document.createElement('li');
@@ -59,15 +59,15 @@ function addCardsToDeck(parentElement, array) {
   }
 }
 
-addCardsToDeck(myDeckOfCards, arrayOfIcons);
+addCardsToDeck(deckOfCards, arrayOfIcons);
 
 //TODO: Add the functionality to handle clicks (event delegation)
 //  * set up the event listener for a card. If a card is clicked:
 //  *  - display the card's symbol (put this functionality in another function that you call from this one)
-let opennedCardsArray = [];
+let arrayOfClickedCards = [];
 
 function openCard() {
-  if (opennedCardsArray.length < 2) {
+  if (arrayOfClickedCards.length < 2) {
     if (event.target.nodeName === 'LI' && !event.target.classList.contains('open')) {
       event.target.classList.add('open');
       countMoves();
@@ -81,28 +81,41 @@ function openCard() {
 // * - if the list already has another card, check to see if the two cards match
 
 function addOpenCardsToList(card) {
-  opennedCardsArray.push(card);
-  console.log(opennedCardsArray);
-  if (opennedCardsArray.length === 2) {
+  arrayOfClickedCards.push(card);
+  console.log(arrayOfClickedCards);
+  if (arrayOfClickedCards.length === 2) {
     console.log('I invoked isItAMatch function');
-    return isItAMatch(opennedCardsArray);
+    return isItAMatch(arrayOfClickedCards);
   }
 }
 
 //   * + if the cards do match, lock the cards in the open position(put this functionality in another function that you call from this one)
+let openCardsArray = []; 
 
 function isItAMatch(array) {
-  console.log(array[0] === array[1] ? true : false);
+  if (array[0] === array[1]) {
+    arrayOfClickedCards.forEach(item => openCardsArray.push(item));
+    console.log('it is a match');
+    console.log(`openCardsArray: ${openCardsArray}`);
+    //TODO: check if openCardsArray.length === 16
+    //TODO: if it is, call the finishGame() function
+  } else {
+    console.log('Not a match');
+    //TODO: call notAMatch() function - removes the class of the element
+  }
+  return arrayOfClickedCards = [];
 }
 
 //   * + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
 
+//TODO: function notAMatch(){}
 
 
 //event.target.classList.remove('open');
 //TODO: Create the winning condition
 // + if all cards have matched, display a message with the final score(put this functionality in another function that you call from this one)
 
+//TODO: function finishGame();
 
 //Implement additional functionality
 //TODO: Move counter
@@ -113,7 +126,6 @@ function countMoves() {
   counter++;
   document.querySelector('.moves').innerText = counter;
 }
-
 
 //TODO: Timer
 let sec = 0;

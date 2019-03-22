@@ -18,10 +18,6 @@ body {
   font-family: "Lucida Console", "Andale Mono", sans-serif;
 }
 
-/* i {
-  font-size: 60px;
-} */
-
 li {
   list-style: none;
 }
@@ -95,7 +91,7 @@ header {
   cursor: pointer;
   margin: 1rem;
   border-radius: 0.5rem;
-  font-size: 0;
+  font-size: 60px;
 }
 
 .open {
