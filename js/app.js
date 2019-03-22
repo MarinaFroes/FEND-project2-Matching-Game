@@ -1,6 +1,3 @@
-//TODO: Start by building a grid of randomly placed cards
-
-//  * Create a list that holds all of your cards
 //Array of fontawesome icons
 let arrayOfIcons = [
   '<i class="far fa-grin-hearts"></i>',
@@ -21,12 +18,8 @@ let arrayOfIcons = [
   '<i class="far fa-grin-tongue"></i>'
 ];
 
-//  * Display the cards on the page
-//  - shuffle the list of cards using the provided "shuffle" method below
-//  - loop through each card and create its HTML
-//  - add each card's HTML to the page
-
-// Shuffle function from http://stackoverflow.com/a/2450976
+//Display the cards on the page
+//Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   let currentIndex = array.length;
   let temporaryValue;
@@ -61,9 +54,7 @@ function addCardsToDeck(parentElement, array) {
 
 addCardsToDeck(deckOfCards, arrayOfIcons);
 
-//TODO: Add the functionality to handle clicks (event delegation)
-//  * set up the event listener for a card. If a card is clicked:
-//  *  - display the card's symbol (put this functionality in another function that you call from this one)
+//Functionality to handle clicks (event delegation)
 let arrayOfClickedCards = [];
 const cssOpenCardClass = 'open';
 let finishChecking = true;
@@ -82,10 +73,8 @@ function openCard() {
     addOpenCardsToList(event.target.innerHTML);
   }
 }
-//TODO: Work on the matching logic
-//  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-// * - if the list already has another card, check to see if the two cards match
 
+//Checking if the open cards match
 function addOpenCardsToList(card) {
   arrayOfClickedCards.push(card);
   console.log(arrayOfClickedCards);
@@ -95,29 +84,24 @@ function addOpenCardsToList(card) {
   }
 }
 
-//   * + if the cards do match, lock the cards in the open position(put this functionality in another function that you call from this one)
 let openCardsArray = []; 
 
 function isItAMatch() {
   if (arrayOfClickedCards[0] === arrayOfClickedCards[1]) {
     arrayOfClickedCards.forEach(item => openCardsArray.push(item));
-    console.log('it is a match');
-    console.log(`openCardsArray: ${openCardsArray}`);
-    
   } else {
-    console.log('Not a match');
     finishChecking = false;
     setTimeout(notAMatch, 1000, arrayOfClickedCards);
   }
+
   if (openCardsArray.length === 16) {
     setTimeout(finishGame, 500);
   }
+
   return arrayOfClickedCards = [];
 }
 
-//   * + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-
-//TODO: 
+//Cards don't match: removing the cards from the list and hiding the card's symbol 
 function notAMatch(arrayOfClickedCards) {
   let listItems = document.querySelectorAll('.card');
   
@@ -131,8 +115,7 @@ function notAMatch(arrayOfClickedCards) {
   finishChecking = true;
 }
   
-//TODO: Create the winning condition
-// + if all cards have matched, display a message with the final score(put this functionality in another function that you call from this one)
+//Winning condition
 
 //TODO: add modal with time elapsed, star rating
 //number of moves and option to restart the game ;
@@ -142,9 +125,7 @@ function finishGame() {
   clearInterval(interval);
 }
 
-//Implement additional functionality
-//TODO: Move counter
-// + increment the move counter and display it on the page(put this functionality in another function that you call from this one)
+//Move counter
 let counter = 0;
 
 function countMoves() {
@@ -152,7 +133,7 @@ function countMoves() {
   document.querySelector('.moves').innerText = counter;
 }
 
-//TODO: Timer
+//Timer
 let sec = 0;
 let min = 0;
 
