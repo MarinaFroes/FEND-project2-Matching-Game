@@ -70,6 +70,7 @@ function openCard() {
   if (event.target.nodeName === 'LI' && !event.target.classList.contains(cssOpenCardClass)) {
     event.target.classList.add(cssOpenCardClass);
     countMoves();
+    starRating(counter);
     addOpenCardsToList(event.target.innerHTML);
   }
 }
@@ -77,9 +78,7 @@ function openCard() {
 //Checking if the open cards match
 function addOpenCardsToList(card) {
   arrayOfClickedCards.push(card);
-  console.log(arrayOfClickedCards);
   if (arrayOfClickedCards.length === 2) {
-    console.log('I invoked isItAMatch function');
     return isItAMatch();
   }
 }
@@ -153,12 +152,21 @@ function timer() {
   }
   if (min === 10) {
     clearInterval(interval);
-    document.getElementById('timer').innerText = `End`;
   }
 }
 const interval = setInterval(timer, 1000);
 
-//TODO: Star rating
+//Star rating
+function starRating(counter) {
+  const newStarIcon = '<i class="far fa-star"></i>';
 
-
-//TODO: Reset Button
+  if (counter > 16 && counter < 26) {
+    document.getElementById('third-star').innerHTML = newStarIcon;
+  }
+  if (counter >= 26 && counter < 36) {
+    document.getElementById('second-star').innerHTML = newStarIcon;
+  }
+  if (counter >= 36) {
+    document.getElementById('first-star').innerHTML = newStarIcon;
+  }
+}

@@ -46,6 +46,7 @@ header {
 }
 
 /* Score-panel */
+
 .score-panel {
   display: flex;
   justify-content: space-around;
@@ -59,7 +60,15 @@ header {
 
 .score-panel,
 .score-panel i {
-  font-size: 30px;
+  font-size: 2rem;
+}
+
+.fa-star{
+  color: yellow;
+  background-color: #b41c7a;
+  border-radius: 50%;
+  padding: 10px;
+  text-align: center;
 }
 
 .restart {
@@ -99,7 +108,7 @@ main {
   cursor: pointer;
   margin: 1rem;
   border-radius: 0.5rem;
-  font-size: 60px;
+  font-size: 0;
 }
 
 .open {
