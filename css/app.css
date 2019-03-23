@@ -18,8 +18,8 @@ body {
   font-family: "Lucida Console", "Andale Mono", sans-serif;
 }
 
-li {
-  list-style: none;
+ul {
+  list-style-type: none;
 }
 
 h1 {
@@ -67,11 +67,19 @@ header {
 }
 
 /* Deck and cards */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45rem;
+}
+
 .deck {
   display: flex;
   align-content: center;
-  align-self: center;
-  margin: 3rem 0;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
   background-color: #ee9ee7;
   width: 39rem;
   height: 39rem;
