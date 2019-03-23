@@ -160,13 +160,13 @@ const interval = setInterval(timer, 1000);
 function starRating(counter) {
   const newStarIcon = '<i class="far fa-star"></i>';
 
-  if (counter > 16 && counter < 26) {
+  if (counter > 16 && counter < 32) {
     document.getElementById('third-star').innerHTML = newStarIcon;
   }
-  if (counter >= 26 && counter < 36) {
+  if (counter >= 32 && counter < 48) {
     document.getElementById('second-star').innerHTML = newStarIcon;
   }
-  if (counter >= 36) {
+  if (counter >= 48) {
     document.getElementById('first-star').innerHTML = newStarIcon;
   }
 }

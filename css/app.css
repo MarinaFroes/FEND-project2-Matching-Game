@@ -23,15 +23,15 @@ ul {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 h2 {
-  font-size: 1.6rem;
+  font-size: 2rem;
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
 }
 
 .container {
@@ -66,8 +66,8 @@ header {
 .fa-star{
   color: yellow;
   background-color: #b41c7a;
-  border-radius: 50%;
-  padding: 10px;
+  border-radius: 100%;
+  padding: 0.8rem;
   text-align: center;
 }
 
@@ -113,14 +113,13 @@ main {
 
 .open {
   background-color: #fff000;
-  font-size: 60px;
+  font-size: 4rem;
   box-shadow: 0 0 0;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  font-size: 1.2rem;
 }
 
 footer a {
@@ -129,7 +128,7 @@ footer a {
 }
 
 .fab {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #7d97ad;
   padding: 1rem;
 }
