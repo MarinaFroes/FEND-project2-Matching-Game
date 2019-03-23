@@ -120,11 +120,16 @@ function notAMatch(arrayOfClickedCards) {
 //number of moves and option to restart the game ;
 
 function finishGame() {
-  alert(
-  `You finished in ${document.getElementById('timer').innerText}. 
+
+  document.querySelector('.modal-congrats').classList.add('show-modal');
+
+  document.querySelector('.modal-text').innerText = (
+  `YOU WIN!
+  You finished in ${document.getElementById('timer').innerText}. 
   You did ${moveCounter} moves. 
-  And you have ${starsCounter} stars.
+  And you have ${'0' + starsCounter} stars.
   `);
+  
   clearInterval(interval);
 }
 
