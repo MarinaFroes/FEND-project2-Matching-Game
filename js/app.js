@@ -94,7 +94,7 @@ function isItAMatch() {
   }
 
   if (openCardsArray.length === 16) {
-    setTimeout(finishGame, 500);
+    setTimeout(finishGame, 500, 'win');
   }
 
   return arrayOfClickedCards = [];
@@ -119,16 +119,28 @@ function notAMatch(arrayOfClickedCards) {
 //TODO: add modal with time elapsed, star rating
 //number of moves and option to restart the game ;
 
-function finishGame() {
-
-  document.querySelector('.modal-congrats').classList.add('show-modal');
-
-  document.querySelector('.modal-text').innerText = (
-  `YOU WIN!
-  You finished in ${document.getElementById('timer').innerText}. 
-  You did ${moveCounter} moves. 
-  And you have ${'0' + starsCounter} stars.
-  `);
+function finishGame(winOrLose) {
+  document.querySelector('.modal').classList.add('show-modal');
+  if (winOrLose === 'win') {
+    
+    document.querySelector('.modal-content').classList.add('win');
+    document.querySelector('.modal-text').innerText = (`
+    YOU WIN!
+    You finished in ${document.getElementById('timer').innerText}. 
+    You did ${moveCounter} moves. 
+    And you have ${'0' + starsCounter} stars.
+    `);
+  }
+  if (winOrLose === 'lose') {
+    
+    document.querySelector('.modal-content').classList.add('lose');
+    document.querySelector('.modal-text').innerText = (`
+    YOU LOSE! 
+    You lost all stars.
+    Try again.
+    `);
+  }
+  
   
   clearInterval(interval);
 }
@@ -182,5 +194,6 @@ function starRating(moveCounter) {
   if (moveCounter >= 48) {
     document.getElementById('first-star').innerHTML = newStarIcon;
     starsCounter = 0;
+    setTimeout(finishGame, 500, 'lose');
   }
 }
