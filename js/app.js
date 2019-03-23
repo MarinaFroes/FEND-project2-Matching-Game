@@ -70,7 +70,7 @@ function openCard() {
   if (event.target.nodeName === 'LI' && !event.target.classList.contains(cssOpenCardClass)) {
     event.target.classList.add(cssOpenCardClass);
     countMoves();
-    starRating(counter);
+    starRating(moveCounter);
     addOpenCardsToList(event.target.innerHTML);
   }
 }
@@ -120,16 +120,20 @@ function notAMatch(arrayOfClickedCards) {
 //number of moves and option to restart the game ;
 
 function finishGame() {
-  alert(`You finished in ${document.getElementById('timer').innerText}. You did ${counter} moves.`);
+  alert(
+  `You finished in ${document.getElementById('timer').innerText}. 
+  You did ${moveCounter} moves. 
+  And you have ${starsCounter} stars.
+  `);
   clearInterval(interval);
 }
 
 //Move counter
-let counter = 0;
+let moveCounter = 0;
 
 function countMoves() {
-  counter++;
-  document.querySelector('.moves').innerText = counter;
+  moveCounter++;
+  document.querySelector('.moves').innerText = moveCounter;
 }
 
 //Timer
@@ -157,16 +161,21 @@ function timer() {
 const interval = setInterval(timer, 1000);
 
 //Star rating
-function starRating(counter) {
-  const newStarIcon = '<i class="far fa-star"></i>';
+let starsCounter = 3;
 
-  if (counter > 16 && counter < 32) {
+function starRating(moveCounter) {
+  const newStarIcon = '<i class="far fa-star"></i>';
+  
+  if (moveCounter > 16 && moveCounter < 32) {
     document.getElementById('third-star').innerHTML = newStarIcon;
+    starsCounter = 2;
   }
-  if (counter >= 32 && counter < 48) {
+  if (moveCounter >= 32 && moveCounter < 48) {
     document.getElementById('second-star').innerHTML = newStarIcon;
+    starsCounter = 1;
   }
-  if (counter >= 48) {
+  if (moveCounter >= 48) {
     document.getElementById('first-star').innerHTML = newStarIcon;
+    starsCounter = 0;
   }
 }
