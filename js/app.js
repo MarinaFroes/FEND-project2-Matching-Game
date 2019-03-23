@@ -43,10 +43,10 @@ arrayOfIcons = shuffle(arrayOfIcons);
 const deckOfCards = document.getElementById("deck");
 
 //Creating li elements and appending them to the deck ul element
-function addCardsToDeck(parentElement, array) {
-  for (let i = 0; i < array.length; i++) {
+function addCardsToDeck(parentElement, arrayOfIcons) {
+  for (let i = 0; i < arrayOfIcons.length; i++) {
     let newCard = document.createElement('li');
-    newCard.innerHTML = array[i];
+    newCard.innerHTML = arrayOfIcons[i];
     newCard.setAttribute('class', 'card');
     parentElement.appendChild(newCard);
   }
@@ -125,23 +125,29 @@ function finishGame(winOrLose) {
 
     document.querySelector('.modal-content').classList.add('win');
     document.querySelector('.modal-text').innerText = (`
-    YOU WIN!
-    Time of game: ${document.getElementById('timer').innerText}
+    CONGRATULATIONS! YOU WON!
+
     Number of moves: ${moveCounter} 
-    Number of stars: ${'0' + starsCounter}
+    Star rating: ${'0' + starsCounter}
+    Time of game: ${document.getElementById('timer').innerText}
+
+    Click on the X to play again.
     `);
   }
   if (winOrLose === 'lose') {
 
     document.querySelector('.modal-content').classList.add('lose');
     document.querySelector('.modal-text').innerText = (`
-    YOU LOSE! 
+    TRY AGAIN! :(
+
+    Too many moves. 
     You lost all stars.
     Number of moves: ${moveCounter} 
-    Try again.
+    Time of game: ${document.getElementById('timer').innerText}
+
+    Click on the X to play again.
     `);
   }
-
 
   clearInterval(interval);
 }

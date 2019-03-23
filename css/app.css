@@ -14,7 +14,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-image: url(./../img/confectionary.png); /* Background pattern from Subtle Patterns */
+  background: #fff url(./../img/confectionary.png); /* Background pattern from Subtle Patterns */
   font-family: "Lucida Console", "Andale Mono", sans-serif;
 }
 
@@ -34,6 +34,7 @@ p {
   font-size: 1.8rem;
 }
 
+/* Container */
 .container {
   display: flex;
   justify-content: center;
@@ -46,7 +47,6 @@ header {
 }
 
 /* Score-panel */
-
 .score-panel {
   display: flex;
   justify-content: space-around;
@@ -64,7 +64,7 @@ header {
 }
 
 .fa-star{
-  color: yellow;
+  color: #ffff00;
   background-color: #b41c7a;
   border-radius: 100%;
   padding: 0.8rem;
@@ -84,11 +84,11 @@ header {
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 15rem;
-  background-color: rgb(116, 115, 115);
+  background-color: #747373;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 20px;
+  padding: 1.1rem;
   position: absolute;
   z-index: 1;
   top: 125%;
@@ -105,8 +105,7 @@ header {
   bottom: 100%;
   left: 50%;
   margin-left: -5px;
-  border-width: 10px;
-  border-style: solid;
+  border: 10px solid;
   border-color: transparent transparent rgb(116, 115, 115) transparent;
 }
 
@@ -148,7 +147,7 @@ main {
   cursor: pointer;
   margin: 1rem;
   border-radius: 0.5rem;
-  font-size: 0;
+  font-size: 60px;
 }
 
 .open {
@@ -185,7 +184,7 @@ main {
 }
 
 .win {
-  background-image: url(./../img/jason-leung-479251-unsplash.jpg);
+  background: #1aa8bb url(./../img/jason-leung-479251-unsplash.jpg);
   /* Image credits: Photo by Jason Leung on Unsplash */
   background-position: center;
   background-size: cover;
@@ -211,11 +210,7 @@ main {
 }
 
 .close-modal:hover {
-  background-color: darkgrey;
-}
-
-.modal-text {
-  margin-top: 4rem;
+  background-color: #a9a9a9;
 }
 
 .show-modal {
