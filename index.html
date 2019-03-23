@@ -15,12 +15,16 @@
     </header>
     <section class="score-panel">
       <div id="timer">00:00</div>
-      <ul class="stars">
+      <ul class="stars tooltip">
+        <span class="tooltiptext">TIP: If you lose all the stars, the game ends.</span>
         <li id="first-star"><i class="fas fa-star"></i></li>
         <li id="second-star"><i class="fas fa-star"></i></li>
         <li id="third-star"><i class="fas fa-star"></i></li>
       </ul>
-      <p>(<span class="moves">0</span> Moves)</p>
+      <p class="tooltip">
+        (<span class="moves">0</span> Moves)
+        <span class="tooltiptext">TIP: You lose stars if you make too many moves.</span>
+      </p>
       <div class="restart">
         <i class="fas fa-undo-alt" onClick="window.location.reload()"></i>
       </div>
