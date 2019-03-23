@@ -14,7 +14,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #fff url('./../img/confectionary.png'); /* Background pattern from Subtle Patterns */
+  background-image: url(./../img/confectionary.png); /* Background pattern from Subtle Patterns */
   font-family: "Lucida Console", "Andale Mono", sans-serif;
 }
 
@@ -186,12 +186,16 @@ main {
 
 .win {
   background-image: url(./../img/jason-leung-479251-unsplash.jpg);
+  /* Image credits: Photo by Jason Leung on Unsplash */
   background-position: center;
   background-size: cover;
+  text-shadow: 3px 3px #000;
+  color: #fff;
 }
 
 .lose {
-  background-color: rgb(180, 178, 178);
+  background: rgba(201, 17, 17, 0.582) url(./../img/confectionary.png); /* Background pattern from Subtle Patterns */
+  color: #000;
 }
 
 .close-modal {
@@ -203,6 +207,7 @@ main {
   cursor: pointer;
   border-radius: 0.25rem;
   background-color: #fff;
+  color: #000;
 }
 
 .close-modal:hover {
@@ -210,9 +215,7 @@ main {
 }
 
 .modal-text {
-  color: #fff;
   margin-top: 4rem;
-  text-shadow: 3px 3px black;
 }
 
 .show-modal {

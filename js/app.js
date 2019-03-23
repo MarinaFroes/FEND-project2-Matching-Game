@@ -83,7 +83,7 @@ function addOpenCardsToList(card) {
   }
 }
 
-let openCardsArray = []; 
+let openCardsArray = [];
 
 function isItAMatch() {
   if (arrayOfClickedCards[0] === arrayOfClickedCards[1]) {
@@ -103,17 +103,17 @@ function isItAMatch() {
 //Cards don't match: removing the cards from the list and hiding the card's symbol 
 function notAMatch(arrayOfClickedCards) {
   let listItems = document.querySelectorAll('.card');
-  
+
   for (let i = 0; i < listItems.length; i++) {
     const icon = listItems[i].innerHTML;
-    
+
     if (listItems[i].classList.contains(cssOpenCardClass) && arrayOfClickedCards.includes(icon)) {
       listItems[i].classList.remove(cssOpenCardClass);
     }
   }
   finishChecking = true;
 }
-  
+
 //Winning condition
 
 //TODO: add modal with time elapsed, star rating
@@ -122,26 +122,27 @@ function notAMatch(arrayOfClickedCards) {
 function finishGame(winOrLose) {
   document.querySelector('.modal').classList.add('show-modal');
   if (winOrLose === 'win') {
-    
+
     document.querySelector('.modal-content').classList.add('win');
     document.querySelector('.modal-text').innerText = (`
     YOU WIN!
-    You finished in ${document.getElementById('timer').innerText}. 
-    You did ${moveCounter} moves. 
-    And you have ${'0' + starsCounter} stars.
+    Time of game: ${document.getElementById('timer').innerText}
+    Number of moves: ${moveCounter} 
+    Number of stars: ${'0' + starsCounter}
     `);
   }
   if (winOrLose === 'lose') {
-    
+
     document.querySelector('.modal-content').classList.add('lose');
     document.querySelector('.modal-text').innerText = (`
     YOU LOSE! 
     You lost all stars.
+    Number of moves: ${moveCounter} 
     Try again.
     `);
   }
-  
-  
+
+
   clearInterval(interval);
 }
 
@@ -167,13 +168,12 @@ function addLeftZero(num) {
 function timer() {
   document.getElementById('timer').innerText = `${addLeftZero(min)}:${addLeftZero(sec)}`;
   sec++;
+
   if (sec > 59) {
     sec = 0;
     min++;
   }
-  if (min === 10) {
-    clearInterval(interval);
-  }
+
 }
 const interval = setInterval(timer, 1000);
 
@@ -182,16 +182,18 @@ let starsCounter = 3;
 
 function starRating(moveCounter) {
   const newStarIcon = '<i class="far fa-star"></i>';
-  
+
   if (moveCounter > 16 && moveCounter < 32) {
     document.getElementById('third-star').innerHTML = newStarIcon;
     starsCounter = 2;
   }
+
   if (moveCounter >= 32 && moveCounter < 48) {
     document.getElementById('second-star').innerHTML = newStarIcon;
     starsCounter = 1;
   }
-  if (moveCounter >= 48) {
+
+  if (moveCounter >= 48 && openCardsArray.length < 16) {
     document.getElementById('first-star').innerHTML = newStarIcon;
     starsCounter = 0;
     setTimeout(finishGame, 500, 'lose');
