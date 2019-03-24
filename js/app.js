@@ -181,6 +181,7 @@ function timer() {
   }
 
 }
+
 const interval = setInterval(timer, 1000);
 
 //Star rating
@@ -189,17 +190,17 @@ let starsCounter = 3;
 function starRating(moveCounter) {
   const newStarIcon = '<i class="far fa-star"></i>';
 
-  if (moveCounter > 16 && moveCounter < 32) {
+  if (moveCounter > 20 && moveCounter < 32) {
     document.getElementById('third-star').innerHTML = newStarIcon;
     starsCounter = 2;
   }
 
-  if (moveCounter >= 32 && moveCounter < 48) {
+  if (moveCounter >= 32 && moveCounter < 40) {
     document.getElementById('second-star').innerHTML = newStarIcon;
     starsCounter = 1;
   }
 
-  if (moveCounter >= 48 && openCardsArray.length < 16) {
+  if (moveCounter >= 40 && openCardsArray.length < 16) {
     document.getElementById('first-star').innerHTML = newStarIcon;
     starsCounter = 0;
     setTimeout(finishGame, 500, 'lose');
