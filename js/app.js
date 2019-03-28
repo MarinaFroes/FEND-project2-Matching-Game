@@ -79,7 +79,7 @@ function openCard() {
     event.target.classList.add(CSS_OPEN_CARD_CLASS);
     countMoves();
     moveCounter === 1 && manageTimer(true);
-    starRating(moveCounter);
+    
     addOpenCardsToList(event.target.innerHTML);
   }
 }
@@ -111,7 +111,8 @@ function isItAMatch() {
   if (openCardsArray.length === 16) {
     setTimeout(finishGame, 500, true);
   }
-
+  starRating(moveCounter);
+  
   return arrayOfClickedCards = [];
 }
 
