@@ -36,7 +36,7 @@ This project is organized as follows:
   - The `shuffles()` function reorganizes randomly the array of icons.
   - The `addCardsToDeck()` function creates `li` elements with their own icon inside and appends them as children to the `ul` `.deck` element.
 - Open cards
-  - The `openCard()` function is an event handler `onclick` on the `ul` `.deck` element and add the class `.open` to the clicked `li` element if it doesn't have this class already.
+  - The `openCard()` function is an event handler `onclick` on the `ul` `#deck` element and add the class `.open` to the clicked `li` element if it doesn't have this class already.
   - `openCard()` also invokes the function `countMoves()` that counts each click on closed cards, `manageTimer()` that starts the timer and `addOpenCardsToList()`. 
   - The `addOpenCardsToList()` function adds clicked card to the `arrayOfClickedCards` and invokes the `isItAMatch()` function if `arrayOfClickedCards` has 2 items.
 - Check matching
@@ -64,6 +64,7 @@ This game works in different sizes of screens as well.
 ## References
 
 - [MDN Documentation](https://developer.mozilla.org)
+- Shuffle function from [Stack Overflow](http://stackoverflow.com/a/2450976)
 - [CSS3 Animate](http://cssanimate.com/)
 - confectionary.png - Background pattern from [Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/) 
 - jason-leung-479251-unsplash.jpg - by Jason Leung from [Unsplash](https://unsplash.com/)

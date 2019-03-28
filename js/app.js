@@ -50,7 +50,7 @@ function addCardsToDeck(parentElement, arrayOfIcons) {
     newCard.innerHTML = arrayOfIcons[i];
     newCard.setAttribute('class', 'card');
     parentElement.appendChild(newCard);
-  }
+  };
 }
 
 addCardsToDeck(deckOfCards, arrayOfIcons);
@@ -74,36 +74,37 @@ function openCard() {
   //Prevents from openning a new card while it's still checking the current pair 
   if (!finishChecking) {
     return;
-  }
+  };
+
   if (arrayOfClickedCards.length >= 2) {
     //To make sure it will not open more then 2 cards at the same time
     return;
-  }
+  };
+
   if (clickedCard.nodeName === 'LI' && !clickedCard.classList.contains(CSS_OPEN_CARD_CLASS)) {
     clickedCard.classList.add(CSS_OPEN_CARD_CLASS);
 
     if (clickedCard.classList.contains(CSS_DONT_MATCH_CLASS)) {
       clickedCard.classList.remove(CSS_DONT_MATCH_CLASS);
-    }
+    };
     
     countMoves();
     moveCounter === 1 && manageTimer(true);
     addOpenCardsToList(clickedCard.innerHTML);
-  }
+  };
 }
 
 //Adds up to 2 clicked cards to an array, then it invokes isItAMatch() function to check if both cards are equal
 function addOpenCardsToList(card) {
   arrayOfClickedCards.push(card);
-  if (arrayOfClickedCards.length === 2) {
-    return isItAMatch();
-  }
+  arrayOfClickedCards.length === 2 && isItAMatch();
 }
 
 //CHECKS IF THE PAIR OF OPEN CARDS ARE A MATCH
 
 //Stores the cards that are a match
 let openCardsArray = [];
+let allCards = document.querySelectorAll('.card');
 
 //Checks matching - if true, push the matching pair to openCardsArray, otherwise, invokes notAMatch() function to turn the cards down again
 //Invokes finishGame() function with win argument if all the cards are open
@@ -111,11 +112,8 @@ function isItAMatch() {
   if (arrayOfClickedCards[0] === arrayOfClickedCards[1]) {
     arrayOfClickedCards.forEach(item => {
       openCardsArray.push(item);
-      let allCards = document.querySelectorAll('.card');
-
       allCards.forEach(card => {
         let icon = card.innerHTML;
-
         if (arrayOfClickedCards.includes(icon)) {
           card.classList.add(CSS_MATCH_CLASS);
         };
@@ -126,11 +124,11 @@ function isItAMatch() {
     //finishChecking is reassigned to false in order to wait notAMatch() function to finish running
     finishChecking = false;
     setTimeout(notAMatch, 1000, arrayOfClickedCards);
-  }
+  };
 
   if (openCardsArray.length === 16) {
     setTimeout(finishGame, 500, true);
-  }
+  };
   starRating(moveCounter);
 
   return arrayOfClickedCards = [];
@@ -139,16 +137,14 @@ function isItAMatch() {
 //Removes the open class from non matching cards - turns the cards down again 
 //Reassigns finishChecking to true, to allow opening new cards
 function notAMatch(arrayOfClickedCards) {
-  let allCards = document.querySelectorAll('.card');
 
   allCards.forEach(card => {
     let icon = card.innerHTML;
-
-    if(card.classList.contains(CSS_OPEN_CARD_CLASS) && arrayOfClickedCards.includes(icon)) {
+    if (card.classList.contains(CSS_OPEN_CARD_CLASS) && arrayOfClickedCards.includes(icon)) {
       card.classList.add(CSS_DONT_MATCH_CLASS);
       card.classList.remove(CSS_OPEN_CARD_CLASS);
     };
-  })
+  });
 
   finishChecking = true;
 }
@@ -181,12 +177,11 @@ function displayModal(classToAdd) {
 
     Click on the X to play again.
     `);
-  }
+  };
 
   document.querySelector('.modal-text').innerText = text;
   document.querySelector('.modal-content').classList.add(classToAdd);
 }
-
 
 function finishGame(isWinner) {
   isWinner ? displayModal('win') : displayModal('lose');
@@ -207,18 +202,17 @@ let min = 0;
 let interval;
 
 function manageTimer(runTimer) {
-  
   if (runTimer) {
     interval = setInterval(timer, 1000);
   } else {
     clearInterval(interval);
-  }
+  };
 }
 
 function addLeftZero(num) {
   if (num < 10) {
     num = '0' + num;
-  }
+  };
   return num;
 }
 
@@ -229,8 +223,7 @@ function timer() {
   if (sec > 59) {
     sec = 0;
     min++;
-  }
-  
+  };
 }
 
 //STAR RATING
@@ -244,16 +237,16 @@ function starRating(moveCounter) {
   if (moveCounter > 20 && moveCounter < 35) {
     document.getElementById('third-star').innerHTML = newStarIcon;
     starsCounter = 2;
-  }
+  };
 
   if (moveCounter >= 35 && moveCounter < 48) {
     document.getElementById('second-star').innerHTML = newStarIcon;
     starsCounter = 1;
-  }
+  };
 
   if (moveCounter >= 48 && openCardsArray.length < 16) {
     document.getElementById('first-star').innerHTML = newStarIcon;
     starsCounter = 0;
     setTimeout(finishGame, 500, false);
-  }
+  };
 }
