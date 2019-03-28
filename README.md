@@ -30,7 +30,7 @@ This project is organized as follows:
 ## How does it work?
 
 - Display cards on the deck
-  - The deck of cards is initialy composed by an empty `ul` element.
+  - The deck of cards is initially composed by an empty `ul` element.
   - An array stores the icons that will be distributed on the deck inside of `li` elements. 
   - Each icon appears twice in the array.
   - The `shuffles()` function reorganizes randomly the array of icons.
@@ -41,8 +41,18 @@ This project is organized as follows:
   - The `addOpenCardsToList()` function adds clicked card to the `arrayOfClickedCards` and invokes the `isItAMatch()` function if `arrayOfClickedCards` has 2 items.
 - Check matching
   - The `isItAMatch()` function adds cards to `openCardsArray`if they match, otherwise, it invokes `notAMatch()` function.
-  - `isItAMatch()` also invokes `finishGame()` function if `openCardsArray` has 16 cards (all the cards on the game were matched).
-
+  - `isItAMatch()` also invokes `starRating()` to update the `starCounter` based on the `moveCounter` and the `finishGame()` function if `openCardsArray` has 16 cards (which means that all the cards on the deck were matched).
+  - The `notAMatch()` function removes the class `.open` from the clicked cards in order to close them again.
+- Additional Features
+  - The `countMoves()` function increments the value of `moveCounter` every time a card is open.
+  - The `starRating()` function decrements the value of `starCounter` based on the value of `moveCounter` and invokes `finishGame()` if `starCounter` is equal to zero.
+  - The `manageTimer()` function starts or stops the timer by invoking the `timer()` function.
+  - The `timer()` invokes `addLeftZero()` to add left zero to minutes and seconds and updates the timer.
+- Finish game
+  - The `finishGame(true)` is invoked by `isItAMatch()` if `openCardsArray` has 16 cards. Then it invokes `displayModal('win')` to display the Congratulations Modal.
+  - The `finishGame(false)` is invoked by `starRating()` if `starCounter` is equal to 0. Then it invokes `displayModal('lose')` to display the Try Again Modal.
+  - `finishGame()` also invokes `manageTimer()` to stop the `timer()` function.
+  
 ## How to install and use it?
 
 Considering it uses only vanilla JavaScript, HTML and CSS, it is not necessary to install additional features. 
