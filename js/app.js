@@ -18,7 +18,8 @@ let arrayOfIcons = [
   '<i class="far fa-grin-tongue"></i>'
 ];
 
-//Display the cards on the page
+//SHUFFLES AND DISPLAYS THE CARDS ON THE PAGE
+
 //Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   let currentIndex = array.length;
@@ -36,13 +37,13 @@ function shuffle(array) {
   return array;
 }
 
-//To shuffle the array of icons
+//Shuffles the array of icons
 arrayOfIcons = shuffle(arrayOfIcons);
 
-//Saving the deck ul element in a variable
-const deckOfCards = document.getElementById("deck");
+//Defines parent element - saves deck ul element in a variable
+const deckOfCards = document.getElementById('deck');
 
-//Creating li elements and appending them to the deck ul element
+//Distributes the cards on the deck - creates li elements and appends them to the deck ul element
 function addCardsToDeck(parentElement, arrayOfIcons) {
   for (let i = 0; i < arrayOfIcons.length; i++) {
     let newCard = document.createElement('li');
@@ -54,28 +55,36 @@ function addCardsToDeck(parentElement, arrayOfIcons) {
 
 addCardsToDeck(deckOfCards, arrayOfIcons);
 
-//Functionality to handle clicks (event delegation)
+//HANDLES CLICKS TO OPEN CARDS
+
+const CSS_OPEN_CARD_CLASS = 'open';
+
+//Temporarily store a pair of clicked cards
 let arrayOfClickedCards = [];
-const cssOpenCardClass = 'open';
+
+//Condition to run the function OpenCard()
 let finishChecking = true;
 
+//Adds the class open to the clicked list item that doesn't have this class already
 function openCard() {
+  //Prevents from openning a new card while it's still checking the current pair 
   if (!finishChecking) {
     return;
   }
   if (arrayOfClickedCards.length >= 2) {
-    console.log('WARNING: arrayOfClickedCards.length > 2');
+    //To make sure it will not open more then 2 cards at the same time
     return;
   }
-  if (event.target.nodeName === 'LI' && !event.target.classList.contains(cssOpenCardClass)) {
-    event.target.classList.add(cssOpenCardClass);
+  if (event.target.nodeName === 'LI' && !event.target.classList.contains(CSS_OPEN_CARD_CLASS)) {
+    event.target.classList.add(CSS_OPEN_CARD_CLASS);
     countMoves();
+    moveCounter === 1 && manageTimer(true);
     starRating(moveCounter);
     addOpenCardsToList(event.target.innerHTML);
   }
 }
 
-//Checking if the open cards match
+//Adds up to 2 clicked cards to an array, then it invokes isItAMatch() function to check if both cards are equal
 function addOpenCardsToList(card) {
   arrayOfClickedCards.push(card);
   if (arrayOfClickedCards.length === 2) {
@@ -83,48 +92,54 @@ function addOpenCardsToList(card) {
   }
 }
 
+//CHECKS IF THE PAIR OF OPEN CARDS ARE A MATCH
+
+//Stores the cards that are a match
 let openCardsArray = [];
 
+//Checks matching - if true, push the matching pair to openCardsArray, otherwise, invokes notAMatch() function to turn the cards down again
+//Invokes finishGame() function with win argument if all the cards are open
 function isItAMatch() {
   if (arrayOfClickedCards[0] === arrayOfClickedCards[1]) {
     arrayOfClickedCards.forEach(item => openCardsArray.push(item));
   } else {
+    //finishChecking is reassigned to false in order to wait notAMatch() function to finish running
     finishChecking = false;
     setTimeout(notAMatch, 1000, arrayOfClickedCards);
   }
 
   if (openCardsArray.length === 16) {
-    setTimeout(finishGame, 500, 'win');
+    setTimeout(finishGame, 500, true);
   }
 
   return arrayOfClickedCards = [];
 }
 
-//Cards don't match: removing the cards from the list and hiding the card's symbol 
+//Removes the open class from non matching cards - turns the cards down again 
+//Reassigns finishChecking to true, to allow opening new cards
 function notAMatch(arrayOfClickedCards) {
   let listItems = document.querySelectorAll('.card');
 
   for (let i = 0; i < listItems.length; i++) {
     const icon = listItems[i].innerHTML;
 
-    if (listItems[i].classList.contains(cssOpenCardClass) && arrayOfClickedCards.includes(icon)) {
-      listItems[i].classList.remove(cssOpenCardClass);
+    if (listItems[i].classList.contains(CSS_OPEN_CARD_CLASS) && arrayOfClickedCards.includes(icon)) {
+      listItems[i].classList.remove(CSS_OPEN_CARD_CLASS);
     }
   }
+  //finishChecking is reassigned to true again to allow openning a new card
   finishChecking = true;
 }
 
-//Winning condition
+//DEFINES WINNING CONDITION
 
-//TODO: add modal with time elapsed, star rating
-//number of moves and option to restart the game ;
-
-function finishGame(winOrLose) {
+//Displays congratulation or try again modal 
+function displayModal(classToAdd) {
   document.querySelector('.modal').classList.add('show-modal');
-  if (winOrLose === 'win') {
+  let text;
 
-    document.querySelector('.modal-content').classList.add('win');
-    document.querySelector('.modal-text').innerText = (`
+  if (classToAdd === 'win') {
+    text = (`
     CONGRATULATIONS! YOU WON!
 
     Number of moves: ${moveCounter} 
@@ -133,11 +148,8 @@ function finishGame(winOrLose) {
 
     Click on the X to play again.
     `);
-  }
-  if (winOrLose === 'lose') {
-
-    document.querySelector('.modal-content').classList.add('lose');
-    document.querySelector('.modal-text').innerText = (`
+  } else if (classToAdd === 'lose') {
+    text = (`
     TRY AGAIN! :(
 
     Too many moves. 
@@ -149,10 +161,17 @@ function finishGame(winOrLose) {
     `);
   }
 
-  clearInterval(interval);
+  document.querySelector('.modal-text').innerText = text;
+  document.querySelector('.modal-content').classList.add(classToAdd);
 }
 
-//Move counter
+
+function finishGame(isWinner) {
+  isWinner ? displayModal('win') : displayModal('lose');
+  manageTimer(false);
+}
+
+//MOVE COUNTER
 let moveCounter = 0;
 
 function countMoves() {
@@ -160,13 +179,23 @@ function countMoves() {
   document.querySelector('.moves').innerText = moveCounter;
 }
 
-//Timer
+//TIMER
 let sec = 0;
 let min = 0;
+let interval;
+
+function manageTimer(runTimer) {
+  
+  if (runTimer) {
+    interval = setInterval(timer, 1000);
+  } else {
+    clearInterval(interval);
+  }
+}
 
 function addLeftZero(num) {
   if (num < 10) {
-    num = "0" + num;
+    num = '0' + num;
   }
   return num;
 }
@@ -179,30 +208,30 @@ function timer() {
     sec = 0;
     min++;
   }
-
+  
 }
 
-const interval = setInterval(timer, 1000);
-
-//Star rating
+//STAR RATING
+//Removes stars depending on the number of moves
+//When the user loses all the stars, it invokes finishGame() with a 'lose' argument
 let starsCounter = 3;
 
 function starRating(moveCounter) {
   const newStarIcon = '<i class="far fa-star"></i>';
 
-  if (moveCounter > 20 && moveCounter < 32) {
+  if (moveCounter > 2 && moveCounter < 5) {
     document.getElementById('third-star').innerHTML = newStarIcon;
     starsCounter = 2;
   }
 
-  if (moveCounter >= 32 && moveCounter < 40) {
+  if (moveCounter >= 5 && moveCounter < 16) {
     document.getElementById('second-star').innerHTML = newStarIcon;
     starsCounter = 1;
   }
 
-  if (moveCounter >= 40 && openCardsArray.length < 16) {
+  if (moveCounter >= 16 && openCardsArray.length < 16) {
     document.getElementById('first-star').innerHTML = newStarIcon;
     starsCounter = 0;
-    setTimeout(finishGame, 500, 'lose');
+    setTimeout(finishGame, 500, false);
   }
 }

@@ -152,6 +152,7 @@ main {
   background-color: #fff000;
   font-size: 3rem;
   box-shadow: 0 0 0;
+  cursor: default;
 }
 
 /* Modal */
