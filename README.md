@@ -31,9 +31,9 @@ This project is organized as follows:
 
 - Display cards on the deck
   - The deck of cards is initially composed by an empty `ul` element.
-  - An array stores the icons that will be distributed on the deck inside of `li` elements. 
-  - Each icon appears twice in the array.
-  - The `shuffles()` function reorganizes randomly the array of icons.
+  - The `arrayOfIcons` stores the icons that will be distributed on the deck inside of `li` elements. 
+  - Each icon appears once in the array. Then the `arrayOfIcons` is duplicated.
+  - The `shuffles()` function reorganizes randomly the `arrayOfIcons`.
   - The `addCardsToDeck()` function creates `li` elements with their own icon inside and appends them as children to the `ul` `.deck` element.
 - Open cards
   - The `openCard()` function is an event handler `onclick` on the `ul` `#deck` element and add the class `.open` to the clicked `li` element if it doesn't have this class already.
