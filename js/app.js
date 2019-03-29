@@ -1,13 +1,5 @@
-//Array of fontawesome icons
+//Array of unique fontawesome icons
 let arrayOfIcons = [
-  '<i class="far fa-grin-hearts"></i>',
-  '<i class="far fa-frown-open"></i>',
-  '<i class="far fa-grimace"></i>',
-  '<i class="far fa-grin"></i>',
-  '<i class="far fa-grin-beam-sweat"></i>',
-  '<i class="far fa-meh-rolling-eyes"></i>',
-  '<i class="far fa-grin-squint"></i>',
-  '<i class="far fa-grin-tongue"></i>',
   '<i class="far fa-grin-hearts"></i>',
   '<i class="far fa-frown-open"></i>',
   '<i class="far fa-grimace"></i>',
@@ -17,6 +9,9 @@ let arrayOfIcons = [
   '<i class="far fa-grin-squint"></i>',
   '<i class="far fa-grin-tongue"></i>'
 ];
+
+//Duplicates arrayOfIcons
+arrayOfIcons = arrayOfIcons.concat(arrayOfIcons);
 
 //SHUFFLES AND DISPLAYS THE CARDS ON THE PAGE
 
