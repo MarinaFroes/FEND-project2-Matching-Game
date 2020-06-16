@@ -297,10 +297,14 @@ footer a {
   cursor: pointer;
 }
 
-.fab {
+.icon {
   font-size: 2rem;
   color: #7d97ad;
   padding: 1rem;
+}
+
+.icon:hover {
+  color: black;
 }
 
 @media screen and (max-width: 400px) {

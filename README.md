@@ -1,6 +1,6 @@
 
-![Favicon](/img/favicon.png) 
-# Matching Game - Udacity Front-End Nanodegree Project 2
+<p align="center"><img src="./img/mylogo.svg" alt="logo" title="logo" width="80"></p>
+<h1 align="center">Matching Game - Udacity Front-End Nanodegree Project 2</h1>
 
 ## Introduction
 
