@@ -1,4 +1,3 @@
-
 <p align="center"><img src="./img/mylogo.svg" alt="logo" title="logo" width="80"></p>
 <h1 align="center">Matching Game - Udacity Front-End Nanodegree Project 2</h1>
 
@@ -14,6 +13,8 @@ The HTML and CSS files were validated by the followings validators  without any 
 - [W3C CSS Validator](https://validator.w3.org/)
 
 ## Overview
+
+<p align="center"><img src="./img/screenshot.png" alt="screenshot of the page" title="screenshot of the page" width="50%"></p>
 
 This project is organized as follows:
  - index.html 
